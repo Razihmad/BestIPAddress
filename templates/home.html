@@ -10,7 +10,6 @@ Home
   alert('{{message}}')
 </script>
 {% endfor %}
-<img src="{%static 'images/ipimage.jpg' %}" alt="">
 <div class="content">
   <aside class="ipgen">
     <form action="" method="POST">
@@ -45,6 +44,8 @@ Home
           <th><b> City </b></th>
           <th><b>Session ID </b> </th>
           <th><b>Score </b></th>
+          <th><b>Time Zone</b></th>
+          <th><b>Login</b></th>
         </tr>
       </thead>
       <tbody>
@@ -55,6 +56,8 @@ Home
           <td>{{ip.city}}</td>
           <td>{{ip.session_id}}</td>
           <td>{{ip.score}}</td>
+          <td>{{ip.timezone}}</td>
+          <td>{{ip.login}}</td>
         </tr>
 
         {% endfor %}

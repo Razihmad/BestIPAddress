@@ -5,7 +5,6 @@
 
 {% endblock title %}
 {% block content %}
-<img src="{% static 'images/addcity.jpg' %}" alt="">
 <div class="cityform">
   <form action="{% url 'addcity' %}" method="POST">
       {% csrf_token %}

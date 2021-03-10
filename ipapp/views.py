@@ -6,6 +6,9 @@ import string
 import random
 import datetime
 from django.contrib import messages
+import urllib.request
+import random
+# customer-Smdevops-cc-US-city-Kansas_City-sesstime-20-sessid-iptest567431
 
 
 # It generate the random string which we use for the session id in generating new ip address
@@ -16,23 +19,33 @@ def get_random_string(length):
 
 
 # This function first connect  to the proxy first then return the ip address of that proxy server
-def get_ip(id):
-    proxies = {
-        'http': 'http://sudhanshumewati:UFgPvV3Tbv806WeC_country-UnitedStates_session-' + id + '@proxy.packetstream.io:31112',
-        'https': 'http://sudhanshumewati:UFgPvV3Tbv806WeC_country-UnitedStates_session-' + id + '@proxy.packetstream.io:31112'
-    }
-    res = requests.get('https://ipinfo.io', proxies=proxies)
-    data = res.json()
-    ip = data['ip']
-    return ip
+def get_ip(id,city):
+    username = 'Smdevops'
+    password = '123456'
+    country = 'US'
+    city = city
+    session = random.random()
+    entry = ('http://customer-%s-cc-%s-city-%s-sessid-%s:%s@pr.oxylabs.io:7777' %
+        (username, country, city, session, password))
+    query = urllib.request.ProxyHandler({
+        'http': entry,
+        'https': entry,
+    })
+    execute = urllib.request.build_opener(query)
+    data = execute.open('https://ipinfo.io').read()
+    new_data = data.decode('utf-8')
+    d = json.dumps(new_data)
+    final_dictionary = json.loads(new_data) 
+    return final_dictionary['ip'],final_dictionary['timezone']
+
 
 
 # This function gives you the fraud_score of the ip address
 def quality_score(ip):
     url = 'https://ipqualityscore.com/api/json/ip/4ZHhcIZms4aaj2ff95kMdfoHvbfxynVi/' + \
-        ip + '?strictness=1&allow_public_access_points=true'
+        ip + '?strictness=3&allow_public_access_points=true'
     score = requests.get(url='https://ipqualityscore.com/api/json/ip/4ZHhcIZms4aaj2ff95kMdfoHvbfxynVi/' +
-                         ip+'?strictness=1&allow_public_access_points=true').json()
+                         ip+'?strictness=3&allow_public_access_points=true').json()
     return score
 
 # Views for this project  
@@ -47,7 +60,9 @@ def home(request):
             session_id = get_random_string(n)
             try:
 
-                ip = get_ip(id=session_id)
+                data = get_ip(id=session_id,city = city)
+                ip = data[0]
+                timezone = data[1]
                 score = quality_score(ip)
             except requests.exceptions.ProxyError:
                 continue
@@ -58,11 +73,11 @@ def home(request):
                 if score['fraud_score'] <= s:
                     city = score['city']
                     ip = ip
-                    login = 'customer-hk2020-cc-US-city-' + score['city'] + '-sesstime-20-sessid-'+session_id
+                    login_id = 'customer-Smdevops-cc-US-city-' + city + '-sesstime-20-sessid-' + session_id
                     password = 123456
-                    data = Bestip(ip = ip,city = city,login = login,session_id = session_id,password = password,score = score['fraud_score'])
+                    data = Bestip(ip = ip,city = city,session_id = session_id,password = password,score = score['fraud_score'],login = login_id,timezone = timezone)
                     data.save()
-                    return render(request, 'ip.html', {'ip':ip,'login':'customer-hk2020-cc-US-city-' + score['city'] + '-sesstime-20-sessid-'+session_id})
+                    return render(request, 'ip.html', {'ip':ip,'login':'customer-Smdevops-cc-US-city-' + city + '-sesstime-20-sessid-' + session_id})
                     break
                 else:
                     continue
