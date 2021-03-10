@@ -1,0 +1,154 @@
+.n{
+    opacity: 0.8;
+}
+.hm{
+    background: linear-gradient( 35deg,  #2aa8b1,#5b78c9);
+            position: relative;
+            left: 100px;
+            width: 100px;
+            border-radius: 10px;
+            color: aqua;
+}
+.act{
+    position: absolute;
+    right: 160px;
+    width: 98px;
+    height: 40px;
+    border-radius: 10px;
+    color: aqua;
+    background: linear-gradient(35deg, #2aa8b1,#5b78c9 ); ;
+    bottom: 5px;
+
+}
+
+.content{
+    position: absolute;
+    top: 12%;
+    left: 80px;
+    display: flex;
+    flex-direction: row;
+}
+.content .ipgen{
+    position: relative;
+    top: 10px;
+}
+
+.fsco{
+    width: 400px;
+    border-radius: 10px;
+}
+
+#city{
+    width: 400px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    z-index: -1;
+    opacity: 0.7;
+    /* overflow: hidden; */
+}
+.details{
+    position: relative;
+    left: 42%;
+    bottom: 80px;
+    width: 560px;
+    top: -9px;
+}
+
+.details table thead{
+    color:  black;
+    font-size: 20px;
+}
+.details table td{
+    color: black;
+    font-size: 16px;}
+.details label{
+    font-size: 17px;
+    color: black;}
+
+h3{
+    color: #ffae42;
+}
+
+
+.citylist{
+    width: 500px;
+    position: absolute;
+    left: 10%;
+    top: 10%;
+
+    color: #FFA500;
+}
+.citylist th{
+    width: 169px;
+    font-size: 25px;
+    color: aquamarine;
+}
+.citylist table td{
+    font-size: 22px;
+    color: chartreuse;
+}
+.cityform{
+    position: absolute;
+    top: 30%;
+    right: 100px;
+    
+    }
+
+.bac{
+    position: absolute;
+    left: 280px;
+    bottom: -7px;
+    width: 100px;
+    border-radius: 10px;
+    color: 5CB85C;
+    color: #c71585;
+}
+/*ip.html css */
+main{
+    background:linear-gradient(45deg,rgb(226, 154, 154),rgb(221, 221, 153));
+    height: 100vh;
+    width: 100%;
+    position: absolute;
+    top: 50px;
+}
+.ipaddress{
+    border: 1px solid black;
+    display: inline-block;
+    position: absolute;
+    top: 24%;
+    left: 23%;
+    width: 876px;
+    height: 300px;
+    box-sizing: border-box;
+    padding-top: 30px;
+    padding-left: 30px;
+    border-radius: 10px;
+}
+
+.ipaddress h3:first-child{
+    margin-left: 22%;
+    color: #3f9e7e;
+}
+.ipaddress h3:nth-child(2){
+    margin-left: 2%;
+    color: #904c4c;
+}
+.ipaddress h3:nth-child(3){
+  margin-left: 30%;
+  color: #904c4c;
+
+
+}
+.ipaddress h3:nth-child(4){
+  margin-left: 30%;
+  color: #904c4c;
+
+
+}

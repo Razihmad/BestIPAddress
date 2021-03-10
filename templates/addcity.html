@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+  Add City
+
+{% endblock title %}
+{% block content %}
+<img src="{% static 'images/addcity.jpg' %}" alt="">
+<div class="cityform">
+  <form action="{% url 'addcity' %}" method="POST">
+      {% csrf_token %}
+    <div class="form-floating mb-4">
+        <input type="text" name="city_name" class="form-control fsco" id="floatingInput"
+          placeholder="Enter City Name" style="height: 47px
+          ;text-transform:capitalize;" required autofocus>
+        <label for="floatingInput">Enter City Name</label>
+        <br> <br>
+        <input type="submit" class="btn btn-success bac" value="Add City">
+      </div>
+  </form>
+</div>
+<div class="citylist">
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+          <tr>
+            <th><b>Serial No</b></th>
+              <th><b>Date</b></th>
+            <th><b> City </b></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for city in cities %}
+          <tr>
+            <td>{{city.pk}}</td>
+            <td>{{city.name}}</td>
+            <td>{{city.date}}</td>
+         
+          </tr>
+  
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+<script>
+    $(document).ready(function () {
+      $('#example').DataTable();
+    });
+  </script>
+
+{% endblock content %}
