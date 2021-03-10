@@ -24,9 +24,9 @@ def get_ip(id,city):
     password = '123456'
     country = 'US'
     city = city
-    session = random.random()
+    # session = random.random()
     entry = ('http://customer-%s-cc-%s-city-%s-sessid-%s:%s@pr.oxylabs.io:7777' %
-        (username, country, city, session, password))
+        (username, country, city, id, password))
     query = urllib.request.ProxyHandler({
         'http': entry,
         'https': entry,
