@@ -8,7 +8,6 @@ import datetime
 from django.contrib import messages
 import urllib.request
 import random
-# customer-Smdevops-cc-US-city-Kansas_City-sesstime-20-sessid-iptest567431
 
 
 # It generate the random string which we use for the session id in generating new ip address
@@ -18,7 +17,7 @@ def get_random_string(length):
     return s
 
 
-# This function first connect  to the proxy first then return the ip address of that proxy server
+# This function first connect to the proxy then return the ip address of that proxy server
 def get_ip(id,city):
     username = 'Smdevops'
     password = '123456'
@@ -48,6 +47,8 @@ def quality_score(ip):
                          ip+'?strictness=3&allow_public_access_points=true').json()
     return score
 ses = []
+
+
 # Views for this project  
 def home(request):
     if request.method == 'POST':
