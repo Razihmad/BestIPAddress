@@ -26,7 +26,7 @@ SECRET_KEY = 'oga(=$08)vm@i0aee85(#zdv5mvbvrr%q4_=1eq2(2p3440o4e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['13.235.254.227']
+ALLOWED_HOSTS = []
 
 
 # Application definition

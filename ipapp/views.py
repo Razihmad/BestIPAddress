@@ -47,7 +47,7 @@ def quality_score(ip):
     score = requests.get(url='https://ipqualityscore.com/api/json/ip/4ZHhcIZms4aaj2ff95kMdfoHvbfxynVi/' +
                          ip+'?strictness=3&allow_public_access_points=true').json()
     return score
-
+ses = []
 # Views for this project  
 def home(request):
     if request.method == 'POST':
@@ -59,11 +59,14 @@ def home(request):
             n = random.randint(1, 8)
             session_id = get_random_string(n)
             try:
-
-                data = get_ip(id=session_id,city = city)
-                ip = data[0]
-                timezone = data[1]
-                score = quality_score(ip)
+                if session_id not in ses:
+                    data = get_ip(id=session_id,city = city)
+                    ip = data[0]
+                    timezone = data[1]
+                    score = quality_score(ip)
+                    ses.append(session_id)
+                else:
+                    continue
             except requests.exceptions.ProxyError:
                 continue
             except requests.exceptions.SSLError:
@@ -83,8 +86,8 @@ def home(request):
                     continue
             else:
                 return render(request,'error.html',{'messages':score['message']})
-
                 break    
+
     return render(request,'home.html',{'cities':City.objects.all,'ips':Bestip.objects.all})
     
 def addcity(request):
