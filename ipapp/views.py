@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from .models import City,Bestip
+from .models import Allip, City,Bestip
 import requests
 import json
 import string
@@ -65,6 +65,10 @@ def home(request):
                     timezone = data[1]
                     score = quality_score(ip)
                     ses.append(session_id)
+                    if (ip,city,score['fraud_score']) in Allip.objects.values_list('ip','city','score'):
+                        messages.info("No more ip in this city ")
+                        redirect('home')
+                        break
                 else:
                     continue
             except requests.exceptions.ProxyError:
@@ -78,12 +82,23 @@ def home(request):
                     ip = ip
                     login_id = 'customer-Smdevops-cc-US-city-' + city + '-sesstime-20-sessid-' + session_id
                     password = 123456
-                    data = Bestip(ip = ip,city = city,session_id = session_id,password = password,score = score['fraud_score'],login = login_id,timezone = timezone)
-                    data.save()
-                    return render(request, 'ip.html', {'ip':ip,'login':'customer-Smdevops-cc-US-city-' + city + '-sesstime-20-sessid-' + session_id})
-                    break
+                    f_score = score['fraud_score']
+                    d = Allip(ip = ip,score = score['fraud_score'],city = score['city'])
+                    d.save()
+                    if (ip,city,session_id,f_score) not in Bestip.objects.values_list('ip', 'city','session_id','score'):
+                        data = Bestip(ip = ip,city = city,session_id = session_id,password = password,score = score['fraud_score'],login = login_id,timezone = timezone)
+                        data.save()
+                        return render(request, 'ip.html', {'ip':ip,'login':'customer-Smdevops-cc-US-city-' + city + '-sesstime-20-sessid-' + session_id})
+                    
+                        break
+                    else:
+                        messages.info(f"You already have this ip address with {f_score} score in your database !! ")
+                        redirect('home')
+                        break
                 else:
-                    continue
+                    d = Allip(ip = ip,score = score['fraud_score'],city = score['city'])
+                    d.save()
+                    continue 
             else:
                 return render(request,'error.html',{'messages':score['message']})
                 break    
