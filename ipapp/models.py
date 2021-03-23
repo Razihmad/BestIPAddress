@@ -6,7 +6,7 @@ from datetime import date, timezone
 # Create your models here.
 class City(models.Model):
     name = models.CharField(max_length=200)
-    date = models.DateField()
+    date = models.DateField(default=date.today())
 
     def __str__(self):
         return self.name
