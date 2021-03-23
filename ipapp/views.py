@@ -76,6 +76,10 @@ def home(request):
                 continue
             except requests.exceptions.SSLError:
                 continue
+            except requests.exceptions.ConnectionError:
+                continue
+            except requests.exceptions.HTTPError:
+                continue
             if score['success'] == True:
 
                 if score['fraud_score'] <= s:
