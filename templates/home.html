@@ -10,6 +10,9 @@ Home
   alert('{{message}}')
 </script>
 {% endfor %}
+{% for message in messages %}
+  <h3 class="text-center">{{message}}</h3>
+{% endfor %}
 <div class="content">
   <aside class="ipgen">
     <form action="" method="POST">

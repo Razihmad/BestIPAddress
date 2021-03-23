@@ -67,7 +67,7 @@ def home(request):
                     score = quality_score(ip)
                     ses.append(session_id)
                     if (ip,city,score['fraud_score']) in Allip.objects.values_list('ip','city','score'):
-                        messages.info("No more ip in this city ")
+                        messages.info(request,"No more ip in this city ")
                         return redirect('home')
                         break
                 else:
@@ -97,7 +97,7 @@ def home(request):
                     
                         break
                     else:
-                        messages.info(f"You already have this ip address with {f_score} score in your database !! ")
+                        messages.info(request,f"You already have this ip address with {f_score} score in your database !! ")
                         return redirect('home')
                         break
                 else:
