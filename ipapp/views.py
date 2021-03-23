@@ -77,9 +77,13 @@ def home(request):
             except requests.exceptions.SSLError:
                 continue
             except requests.exceptions.ConnectionError:
-                continue
+                messages.info(request,"Please change the city there is no possible connection IP")
+                return redirect('home')
             except requests.exceptions.HTTPError:
                 continue
+            except urllib.error.URLError:
+                messages.info(request,"Please change the city there is no possible connection IP")
+                return redirect('home')
             if score['success'] == True:
 
                 if score['fraud_score'] <= s:
