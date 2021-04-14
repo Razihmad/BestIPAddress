@@ -1,6 +1,4 @@
 # BestIPAddress
-This project is all about working with API using requests library of Python.
-In this project first we connect to a proxy server using some credential and 
-then we access the API of ipinfo.io to know about the IP address of the proxy server to which we are connected to.
-When we get the IP address then we use ipqualityscore API to know the fraud score of the IP address which we get from the above .
-To run this programme you will we required => djngo, requests,urllib and json.
+This project is completely created on django framework. The main prpose of this project is to get the best IP Address on the basis of fraud score of IP in the selected city of USA.
+To achieve this first we connect to that IP by urllib python lib. and then using the request library we access the API of a website which gives the fraud score of the IP to which you are conneted to.
+
