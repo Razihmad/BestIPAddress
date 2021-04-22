@@ -19,8 +19,8 @@ def get_random_string(length):
 
 # This function first connect to the proxy then return the ip address of that proxy server
 def get_ip(id,city):
-    username = 'Smdevops'
-    password = '123456'
+    username = ~
+    password = ~
     country = 'US'
     city = city
     # session = random.random()
@@ -90,7 +90,7 @@ def home(request):
                     city = score['city']
                     ip = ip
                     login_id = 'customer-Smdevops-cc-US-city-' + city + '-sesstime-20-sessid-' + session_id
-                    password = 123456
+                    password = ~
                     f_score = score['fraud_score']
                     d = Allip(ip = ip,score = score['fraud_score'],city = score['city'])
                     d.save()
