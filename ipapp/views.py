@@ -1,41 +1,19 @@
 from django.shortcuts import redirect, render
 from .models import Allip, City,Bestip
-import requests
-import json
-import string
-import random
-import datetime
+import requests, json, string, random, datetime
 from django.contrib import messages
 import urllib.request
-import random
 
 
 # It generate the random string which we use for the session id in generating new ip address
 def get_random_string(length):
-
-    s = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-    return s
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
 
 # This function first connect to the proxy then return the ip address of that proxy server
 def get_ip(id,city):
-    username = ~
-    password = ~
-    country = 'US'
-    city = city
-    # session = random.random()
-    entry = ('http://customer-%s-cc-%s-city-%s-sessid-%s:%s@pr.oxylabs.io:7777' %
-        (username, country, city, id, password))
-    query = urllib.request.ProxyHandler({
-        'http': entry,
-        'https': entry,
-    })
-    execute = urllib.request.build_opener(query)
-    data = execute.open('https://ipinfo.io').read()
-    new_data = data.decode('utf-8')
-    d = json.dumps(new_data)
-    final_dictionary = json.loads(new_data) 
-    return final_dictionary['ip'],final_dictionary['timezone']
+    r = requests.get('https://utilities.tk/network/info').json()
+    return r['ip'], r['timezone']
 
 
 
